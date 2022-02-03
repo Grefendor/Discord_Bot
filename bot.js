@@ -7,5 +7,5 @@ client.login('');
 client.on('ready', readyDiscord);
 
 function readyDiscord(){
-    console.log('Lasse and Vision Forever');
+    console.log('I love you');
 }
