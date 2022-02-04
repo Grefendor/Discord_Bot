@@ -4,6 +4,7 @@ const client = new Client({
 });
 
 const config = require("./config.json");
+const Dordle = require("./dordle.js");
 const axios = require("axios").default;
 //const fetch = require("node-fetch");
 
@@ -47,6 +48,62 @@ client.on("messageCreate",  async message => {
             index = Math.round(index);
             let gif = response.data.results[index].url;
             message.channel.send(gif);
+            break;
+        case "dordle":
+            let argument = args.join(" ");
+            if (argument == "new"){
+                try{
+                    if(newDordle.test()){
+                        message.channel.send("We are already playing");
+                    }
+                }
+                catch{
+                    newDordle = new Dordle();
+                    newDordle.start()
+                    let out = "";
+                    for(let i = 0; i < newDordle.len; i++){
+                        out = out + ":white_large_square: ";
+                    }
+                    message.channel.send(out);
+                }
+            }
+            else if(argument == "repeat"){
+                try{
+                    if(newDordle.test()){
+                        let out = "";
+                        for(let i = 0; i < newDordle.len; i++){
+                            out = out + ":white_large_square: ";
+                        }
+                        message.channel.send(out);
+                    }
+                }
+                catch{
+                    message.channel.send("You haven't started a game yet! Try !dordle new");
+                }
+            }else if(argument == "help"){
+                let out = "The commands are as followed: !dordle new; !dordle repeat;!dordle help; !dordle <yourguesshere>";
+                message.channel.send(out);
+                try{
+                    if(newDordle.test()){
+                        out = "One game is running. Try !dordle repeat";
+                        message.channel.send(out);
+                    }
+                }
+                catch{
+                    out = "No Game is running. Try !dordle new";
+                    message.channel.send(out);
+                }
+            }else{
+                try{
+                    if(newDordle.test()){
+                        let out = newDordle.check(argument);
+                        message.channel.send(out);
+                    }
+                }
+                catch{
+                    message.channel.send("You haven't started a game yet! Try !dordle new");
+                }
+            }
             break;
     }
 });
