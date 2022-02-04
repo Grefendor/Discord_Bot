@@ -4,10 +4,12 @@ const client = new Client({
 });
 
 const config = require("./config.json");
+const axios = require("axios").default;
+//const fetch = require("node-fetch");
 
 // Set the prefix
 let prefix = config.prefix;
-client.on("messageCreate", message => {
+client.on("messageCreate",  async message => {
     if (message.author.bot) return;
     // This is where we'll put our code.
     if (message.content.indexOf(config.prefix) !== 0) return;
@@ -36,6 +38,15 @@ client.on("messageCreate", message => {
             let text = args.join(" ");
             message.delete();
             message.channel.send(text);
+            break;
+        case "gif":
+            let search = args.join(" ");
+            let url = `https://g.tenor.com/v1/search?q=${search}&key=${config.tenor}&limit=8`;
+            let response = await axios(url);
+            let index = (Math.random() * response.data.results.length);
+            index = Math.round(index);
+            let gif = response.data.results[index].url;
+            message.channel.send(gif);
             break;
     }
 });
