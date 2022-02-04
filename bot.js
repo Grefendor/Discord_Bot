@@ -18,7 +18,7 @@ client.on("messageCreate", message => {
 
     switch(command){
         case "ping":
-            message.channel.send("Pong!");
+            message.channel.send("Pong!!");
             break;
         case "blah":
             message.channel.send("Meh.");
