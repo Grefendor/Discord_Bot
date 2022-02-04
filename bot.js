@@ -41,13 +41,30 @@ client.on("messageCreate",  async message => {
             message.channel.send(text);
             break;
         case "gif":
-            let search = args.join(" ");
-            let url = `https://g.tenor.com/v1/search?q=${search}&key=${config.tenor}&limit=8`;
-            let response = await axios(url);
-            let index = (Math.random() * response.data.results.length);
-            index = Math.round(index);
-            let gif = response.data.results[index].url;
-            message.channel.send(gif);
+            try{
+                let search = args.join(" ");
+                let url = `https://g.tenor.com/v1/search?q=${search}&key=${config.tenor}&limit=8`;
+                let response = await axios(url);
+                let index = (Math.random() * response.data.results.length);
+                index = Math.round(index);
+                let gif = response.data.results[index].url;
+                message.channel.send(gif);
+            }catch(error){
+                console.log(error);
+            }
+            break;
+        case "random":
+            try{
+                let url = 'https://random-words-api.vercel.app/word';
+                let response = await axios(url);
+                let randomWord = response.data[0].word;
+                let definition = response.data[0].definition;
+                let pronunciation = response.data[0].pronunciation;
+                let wordmessage = randomWord + "\n" + definition + "\n" + pronunciation;
+                message.channel.send(wordmessage);
+            }catch(error){
+                console.log(error);
+            }
             break;
         case "dordle":
             let argument = args.join(" ");
