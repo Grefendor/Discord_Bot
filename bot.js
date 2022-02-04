@@ -26,14 +26,17 @@ client.on("messageCreate", message => {
         case "asl":
             let [age, sex, location] = args;
             message.reply(`Hello ${message.author.username}, I see you're a ${age} year old ${sex} from ${location}. Wanna date?`);
+            break;
         case "kick":
             let member = message.mentions.members.first();
             let reason = args.slice(1).join(" ");
             member.kick(reason);
+            break;
         case "say":
             let text = args.join(" ");
             message.delete();
             message.channel.send(text);
+            break;
     }
 });
 
