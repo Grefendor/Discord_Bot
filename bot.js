@@ -8,6 +8,11 @@ const Dordle = require("./dordle.js");
 const axios = require("axios").default;
 //const fetch = require("node-fetch");
 
+function dieDelete(message) {
+    this.message = message;
+    this.name = "dieDelete";
+}
+
 // Set the prefix
 let prefix = config.prefix;
 client.on("messageCreate",  async message => {
@@ -69,14 +74,17 @@ client.on("messageCreate",  async message => {
         case "dordle":
             let argument = args.join(" ");
             if (argument == "new"){
+                let out = "";
                 try{
                     if(newDordle.test()){
                         message.channel.send("We are already playing");
+                    } else{
+                        throw new dieDelete("I have to get rid of this object somehow!");
                     }
                 }
                 catch{
                     newDordle = new Dordle();
-                    newDordle.start()
+                    await newDordle.start();
                     let out = "";
                     for(let i = 0; i < newDordle.len; i++){
                         out = out + ":white_large_square: ";
@@ -92,6 +100,8 @@ client.on("messageCreate",  async message => {
                             out = out + ":white_large_square: ";
                         }
                         message.channel.send(out);
+                    } else{
+                        message.channel.send("You haven't started a game yet! Try !dordle new");
                     }
                 }
                 catch{
@@ -104,6 +114,8 @@ client.on("messageCreate",  async message => {
                     if(newDordle.test()){
                         out = "One game is running. Try !dordle repeat";
                         message.channel.send(out);
+                    } else{
+                        message.channel.send("You haven't started a game yet! Try !dordle new");
                     }
                 }
                 catch{
@@ -114,10 +126,31 @@ client.on("messageCreate",  async message => {
                 try{
                     if(newDordle.test()){
                         let out = newDordle.check(argument);
-                        message.channel.send(out);
+                        let output = "";
+                        let win = false
+                        for(let i = 0; i < newDordle.len; i++){
+                            if(out[i] != ":green_square: "){
+                                win = false;
+                                break;
+                            } else{
+                                win = true;
+                            }
+                        }
+                        for(let j = 0; j < newDordle.len; j++){
+                            output = output + out[j];
+                        }
+                        if (win){
+                            message.channel.send(output);
+                            message.channel.send("You won!!!!!!");
+                            newDordle.started = false;
+                            newDordle.word = "";
+                            newDordle.len = 0;
+                        }
+                        else{
+                        message.channel.send(output);
+                        }
                     }
-                }
-                catch{
+                } catch{
                     message.channel.send("You haven't started a game yet! Try !dordle new");
                 }
             }
