@@ -4,6 +4,7 @@ const kick = require('./kick');
 const say = require('./say');
 const asl = require('./asl');
 const dordle = require('./dordle');
+const eightBall = require('./eightBall');
 const randomWord = require('./randomWord');
 const config = require("../config.json");
 
@@ -15,6 +16,7 @@ const commands = {
     asl,
     randomWord,
     dordle,
+    eightBall,
     };
 
 
