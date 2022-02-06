@@ -9,7 +9,7 @@ const client = new Client({
 
 client.once('ready', () =>{
     console.log('Beep Boop, I am a bot');
-})
+});
 
 client.on('messageCreate', commandHandler);
 
