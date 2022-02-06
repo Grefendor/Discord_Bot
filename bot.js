@@ -89,7 +89,7 @@ client.on("messageCreate",  async message => {
                     for(let i = 0; i < newDordle.len; i++){
                         out = out + ":white_large_square: ";
                     }
-                    message.channel.send(out);
+                    message.channel.send(out + " " + newDordle.len + " Letters long");
                 }
             }
             else if(argument == "repeat"){
@@ -99,7 +99,7 @@ client.on("messageCreate",  async message => {
                         for(let i = 0; i < newDordle.len; i++){
                             out = out + ":white_large_square: ";
                         }
-                        message.channel.send(out);
+                        message.channel.send(out + " " + newDordle.len + " Letters long");
                     } else{
                         message.channel.send("You haven't started a game yet! Try !dordle new");
                     }
@@ -138,33 +138,53 @@ client.on("messageCreate",  async message => {
                     out = "No Game is running. Try !dordle new";
                     message.channel.send(out);
                 }
+            } else if(argument == "end"){
+                try{
+                    if(newDordle.test()){
+                        message.channel.send("Okay the game has ended. The word was:");
+                        message.channel.send(newDordle.word);
+                        newDordle.started = false;
+                        newDordle.word = "";
+                        newDordle.len = 0;
+                    } else{
+                        message.channel.send("You haven't started a game yet! Try !dordle new");
+                    }
+                }
+                catch{
+                    out = "No Game is running. Try !dordle new";
+                    message.channel.send(out);
+                }
             }
             else{
                 try{
                     if(newDordle.test()){
                         let out = newDordle.check(argument);
-                        let output = "";
-                        let win = false
-                        for(let i = 0; i < newDordle.len; i++){
-                            if(out[i] != ":green_square: "){
-                                win = false;
-                                break;
-                            } else{
-                                win = true;
+                        if (out != "This word is not the same size! Try !dordle repeat or !dordle help"){
+                            let output = "";
+                            let win = false
+                            for(let i = 0; i < newDordle.len; i++){
+                                if(out[i] != ":green_square: "){
+                                    win = false;
+                                    break;
+                                } else{
+                                    win = true;
+                                }
                             }
-                        }
-                        for(let j = 0; j < newDordle.len; j++){
-                            output = output + out[j];
-                        }
-                        if (win){
+                            for(let j = 0; j < newDordle.len; j++){
+                                output = output + out[j];
+                            }
+                            if (win){
+                                message.channel.send(output);
+                                message.channel.send("You won!!!!!!");
+                                newDordle.started = false;
+                                newDordle.word = "";
+                                newDordle.len = 0;
+                            }
+                            else{
                             message.channel.send(output);
-                            message.channel.send("You won!!!!!!");
-                            newDordle.started = false;
-                            newDordle.word = "";
-                            newDordle.len = 0;
-                        }
-                        else{
-                        message.channel.send(output);
+                            }
+                        } else{
+                            message.channel.send(out);
                         }
                     }
                 } catch{
