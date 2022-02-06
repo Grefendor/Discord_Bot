@@ -4,7 +4,7 @@
 const eightBall = ["",""];
 
 //Write your code underneath the if in line 8
-module.exports = async (msg) => {
+module.exports = async (msg, args) => {
     //Not send a response when there is not question asked
     if (!args.length) return;
     //Take a look at the gif.js file in which I showcase a way to select a random entry of an array
