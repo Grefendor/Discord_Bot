@@ -1,13 +1,12 @@
-//Array for storing the responses of the eight Ball
-//You can add more with a comma and the use of the "Fingies"
-//This has to be filled with generic responses of an Eightball. This has to be done by you
-const eightBall = ["",""];
+const eightBall = ["As I see it, yes.","Ask again later.","Better not tell you now.","Cannot predict now.",
+"Concentrate and ask again.","Don't count on it.","It is certain.","It is decidedly so.","Very doubtful.",
+"Signs point to yes.","You may rely on it.","Yes definitely.","Without a doubt.","Most likely.",
+"Outlook good.","Yes","Reply hazy, try again.","Are you sure you want to know?","Better not tell you now.",
+"Definitely not.","Don't count on it.","For sure.","My reply is no.","My sources say no.","Outlook not so good.",
+"The outcome is positive.","The outcome is negative.","The outcome is unclear.","No such luck.","Luck is on your side."];
 
-//Write your code underneath the if in line 8
 module.exports = async (msg, args) => {
-    //Not send a response when there is not question asked
     if (!args.length) return;
-    //Take a look at the gif.js file in which I showcase a way to select a random entry of an array
-    //In order to execute, since the old unrefactored stuff is still in here, write node .\bot_ref.js instead of just .\bot.js
-    //You can remove these comments once you have completed your code.
-}
+    var index = Math.round(Math.random() * eightBall.length);
+    await msg.reply(eightBall[index]);
+};
