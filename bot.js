@@ -122,7 +122,24 @@ client.on("messageCreate",  async message => {
                     out = "No Game is running. Try !dordle new";
                     message.channel.send(out);
                 }
-            }else{
+            }else if(argument == "hint"){
+                let out = "";
+                try{
+                    if(newDordle.test()){
+                        out = "Okay, here comes the hint";
+                        let hint = newDordle.hinting();
+                        message.channel.send(out);
+                        message.channel.send(hint);
+                    } else{
+                        message.channel.send("You haven't started a game yet! Try !dordle new");
+                    }
+                }
+                catch{
+                    out = "No Game is running. Try !dordle new";
+                    message.channel.send(out);
+                }
+            }
+            else{
                 try{
                     if(newDordle.test()){
                         let out = newDordle.check(argument);

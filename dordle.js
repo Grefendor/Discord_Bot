@@ -3,6 +3,7 @@ module.exports = class Dordle{
     constructor(){
         this.word = "";
         this.started = false;
+        this.hint = "";
         this.len = this.word.length;
     }
     async start(){
@@ -11,6 +12,7 @@ module.exports = class Dordle{
             let url = 'https://random-words-api.vercel.app/word';
             let response = await axios(url);
             this.word = response.data[0].word;
+            this.hint = response.data[0].definition;
             console.log(this.word);
             this.len = this.word.length;
         }catch(error){
@@ -19,6 +21,9 @@ module.exports = class Dordle{
     }
     test(){
         return this.started;
+    }
+    hinting(){
+        return this.hint;
     }
     check(word){
         let lenWord = word.length;
