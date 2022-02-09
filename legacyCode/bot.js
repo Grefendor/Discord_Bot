@@ -3,7 +3,7 @@ const client = new Client( {
     intents: [ Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES ]
 } );
 
-const config = require( "./config.json" );
+const config = require( "../config.json" );
 const Dordle = require( "./dordle.js" );
 const axios = require( "axios" ).default;
 //const fetch = require("node-fetch");
