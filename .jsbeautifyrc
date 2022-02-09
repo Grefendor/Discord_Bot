@@ -1,0 +1,9 @@
+{
+    "indent_char": " ",
+    "indent_size":4,
+    "space_in_paren": true,
+    "space_after_named_function": true,
+    "space_after_anon_function":true,
+    "brace_style": "end-expand,preserve-inline",
+    "editor.formatOnSave":true
+}
