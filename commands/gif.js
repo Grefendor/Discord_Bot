@@ -1,5 +1,5 @@
 const config = require("../config.json");
-const axios = require("axios").default;
+const axios = require( "axios" ).default;
 
 module.exports = async (msg, args) => {
     try{
@@ -13,4 +13,4 @@ module.exports = async (msg, args) => {
     }catch(error){
         console.log(error);
     }
-}
+};
