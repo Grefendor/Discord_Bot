@@ -183,4 +183,4 @@ class Dordle {
             return output;
         }
     }
-};
+}
