@@ -7,7 +7,6 @@ const dordle = require( './dordle' );
 const eightBall = require( './eightBall' );
 const randomWord = require( './randomWord' );
 require("dotenv").config();
-//const config = require( "../config.json" );
 
 const commands = {
     ping,
