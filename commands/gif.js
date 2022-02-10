@@ -1,5 +1,6 @@
 //const config = require("../config.json");
 const axios = require( "axios" ).default;
+require("dotenv").config();
 
 module.exports = async (msg, args) => {
     try{
