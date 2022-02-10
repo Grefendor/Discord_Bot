@@ -1,5 +1,5 @@
 const { Client, Intents } = require( "discord.js" );
-const config = require( "./config.json" );
+//const config = require( "./config.json" );
 
 const commandHandler = require( './commands' );
 
@@ -13,4 +13,4 @@ client.once( 'ready', () => {
 
 client.on( 'messageCreate', commandHandler );
 
-client.login( config.token );
+client.login( process.env.token );

@@ -1,10 +1,10 @@
-const config = require("../config.json");
+//const config = require("../config.json");
 const axios = require( "axios" ).default;
 
 module.exports = async (msg, args) => {
     try{
         var search = args.join(" ");
-        var url = `https://g.tenor.com/v1/search?q=${search}&key=${config.tenor}&limit=8`;
+        var url = `https://g.tenor.com/v1/search?q=${search}&key=${process.env.tenor}&limit=8`;
         var response = await axios(url);
         var index = (Math.random() * response.data.results.length);
         index = Math.round(index);
