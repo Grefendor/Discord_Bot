@@ -18,7 +18,7 @@
   "homepage": "https://github.com/Grefendor/Discord_Bot#readme",
   "dependencies": {
     "@discordjs/rest": "^0.3.0",
-    "axios": "^0.25.0",
+    "axios": "^1.6.2",
     "discord-api-types": "^0.26.1",
     "discord.js": "^13.6.0",
     "dotenv": "^16.0.0"
